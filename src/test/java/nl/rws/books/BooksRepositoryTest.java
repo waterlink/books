@@ -1,5 +1,6 @@
 package nl.rws.books;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,11 @@ public class BooksRepositoryTest {
 
     @Autowired
     private BooksRepository booksRepository;
+
+    @Before
+    public void setUp() throws Exception {
+        booksRepository.deleteAll();
+    }
 
     @Test
     public void CanCreateAndFindBooks() throws Exception {
