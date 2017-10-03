@@ -1,0 +1,6 @@
+CREATE TABLE books (
+  id VARCHAR(50) PRIMARY KEY,
+  title VARCHAR(255)
+);
+
+
