@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {BookList} from "./BookList";
+import {ConnectedBookList} from "./BookList";
 
 export class Root extends Component {
 
@@ -8,7 +8,7 @@ export class Root extends Component {
     return <div>
       <h1>Books Application</h1>
 
-      <BookList/>
+      <ConnectedBookList store={this.props.store}/>
 
     </div>
 

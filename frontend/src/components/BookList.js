@@ -1,10 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types'
-
-const books = [
-  {id: '319f39e4-a820-11e7-abc4-cec278b6b50a', title: 'Ivanhoe'},
-  {id: '319f3c50-a820-11e7-abc4-cec278b6b50a', title: 'Robin Hood'},
-];
+import {actions} from "../actions/booksActions";
+import {connect} from "react-redux";
 
 class Book extends Component {
 
@@ -17,15 +14,19 @@ class Book extends Component {
 }
 
 Book.propTypes = {
-  title: PropTypes.number,
+  title: PropTypes.string,
 };
 
 export class BookList extends Component {
 
   render() {
 
+    if (!this.props.alreadyLoaded) {
+      this.props.loadBooks();
+    }
+
     return <div>
-      {books.map(book =>
+      {this.props.books.map(book =>
         <Book key={book.id} title={book.title}/>
       )}
     </div>
@@ -33,3 +34,23 @@ export class BookList extends Component {
   }
 
 }
+
+const mapStateToProps = (state) => {
+  return {
+    books: state.books.booksList,
+    alreadyLoaded: state.books.alreadyLoaded,
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loadBooks: () => {
+      dispatch(actions.loadBooks());
+    }
+  }
+};
+
+export const ConnectedBookList = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(BookList);

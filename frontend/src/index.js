@@ -4,10 +4,13 @@ import React, {Component} from 'react';
 import {render} from 'react-dom';
 import {AppContainer} from 'react-hot-loader';
 import {Root} from "./components/Root";
+import configureStore from "./store/configureStore";
+
+const store = configureStore();
 
 render(
   <AppContainer>
-    <Root/>
+    <Root store={store}/>
   </AppContainer>,
   document.getElementById('app')
 );
