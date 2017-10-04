@@ -3,6 +3,7 @@ package nl.rws.books;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -18,7 +19,10 @@ public class Book {
     private String title;
     private String status;
 
+    private String borrowedById;
+
     @JsonSerialize(using = MemberToIdSerializer.class)
+    @Column(insertable = false, updatable = false)
     private Member borrowedBy;
 
     public String getId() {
