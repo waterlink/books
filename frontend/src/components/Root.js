@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {ConnectedBookList} from "./BookList";
+import {Provider} from "react-redux";
 
 export class Root extends Component {
 
@@ -8,7 +9,9 @@ export class Root extends Component {
     return <div>
       <h1>Books Application</h1>
 
-      <ConnectedBookList store={this.props.store}/>
+      <Provider store={this.props.store}>
+        <ConnectedBookList/>
+      </Provider>
 
     </div>
 

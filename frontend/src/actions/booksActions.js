@@ -11,11 +11,11 @@ export const actions = {
   loadBooks: (payload) => {
     return (dispatch) => {
       fetch("http://localhost:9090/v1/books")
-        .then(response => response.json())
+        .then(responseBody => responseBody.json())
         .then(response =>
           dispatch(actions.loadBooksSuccess(response)))
-        .catch(() =>
-          dispatch(actions.loadBooksFailure()))
+        .catch((e) =>
+          dispatch(actions.loadBooksFailure(e)))
     }
   },
 

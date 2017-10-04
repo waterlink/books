@@ -1,0 +1,11 @@
+plugins {
+  id "com.moowork.node" version "1.2.0"
+}
+
+apply plugin: 'idea'
+
+idea {
+  module {
+    sourceDirs += file('src')
+  }
+}
