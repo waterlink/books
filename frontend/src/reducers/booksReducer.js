@@ -1,6 +1,6 @@
 import {t} from "../actions/booksActions";
 
-const initialState = {
+export const initialState = {
   booksList: [],
   alreadyLoaded: false,
 };
@@ -13,7 +13,7 @@ export const booksReducer = (state = initialState, action) => {
       return {
         ...state,
         alreadyLoaded: true,
-        booksList: action.payload["books"],
+        booksList: action.payload,
       };
 
     case t.LOAD_BOOKS_FAILURE:
@@ -25,5 +25,3 @@ export const booksReducer = (state = initialState, action) => {
   }
 
 };
-
-

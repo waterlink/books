@@ -80,9 +80,7 @@ describe('<ConnectedBookList />', () => {
     const dispatchedActions = store.getActions();
 
     expect(dispatchedActions).toEqual([
-      actions.loadBooksSuccess({
-        books: bookList,
-      }),
+      actions.loadBooksSuccess(bookList),
     ]);
 
   });

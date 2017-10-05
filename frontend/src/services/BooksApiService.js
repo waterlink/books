@@ -7,6 +7,7 @@ export class BooksApiService {
   loadBooks() {
     return fetch("http://localhost:9090/v1/books")
       .then(responseBody => responseBody.json())
+      .then(response => response["books"])
   }
 
 }
@@ -21,7 +22,7 @@ export class MockBooksApiService {
 
     const fakePromise = {
       then: (fn) => {
-        fn({books: this.bookList});
+        fn(this.bookList);
         return fakePromise;
       },
 
