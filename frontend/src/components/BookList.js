@@ -1,21 +1,7 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types'
 import {actions} from "../actions/booksActions";
 import {connect} from "react-redux";
-
-class Book extends Component {
-
-  render() {
-    return <div>
-      {this.props.title}
-    </div>
-  }
-
-}
-
-Book.propTypes = {
-  title: PropTypes.string,
-};
+import {Book} from "./Book";
 
 export class BookList extends Component {
 
