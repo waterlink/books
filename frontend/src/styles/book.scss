@@ -1,0 +1,12 @@
+
+.book-container {
+  display: flex;
+
+  .book-title {
+    flex: 1;
+  }
+
+  .book-status {
+    flex: 1;
+  }
+}

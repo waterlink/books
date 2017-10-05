@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {actions} from "../actions/booksActions";
 import {connect} from "react-redux";
 import {Book} from "../components/Book";
+import {push} from "react-router-redux";
 
 export class BookList extends Component {
 
@@ -13,7 +14,7 @@ export class BookList extends Component {
 
     return <div>
       {this.props.books.map(book =>
-        <Book key={book.id} title={book.title}/>
+        <Book key={book.id} {...book} startBorrow={this.props.startBorrow}/>
       )}
     </div>
 
@@ -32,7 +33,10 @@ const mapDispatchToProps = (dispatch) => {
   return {
     loadBooks: () => {
       dispatch(actions.loadBooks());
-    }
+    },
+    startBorrow: (id) => {
+      dispatch(push(`/borrow/${id}`))
+    },
   }
 };
 

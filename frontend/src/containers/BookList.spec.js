@@ -5,6 +5,7 @@ import thunk from 'redux-thunk';
 import {createMockStore} from "../testutils";
 import {actions} from "../actions/booksActions";
 import {booksApi, MockBooksApiService} from "../services/BooksApiService";
+import {push} from "react-router-redux";
 
 describe("<BookList />", () => {
 
@@ -36,8 +37,8 @@ describe("<BookList />", () => {
 
   it("renders books", () => {
     const books = [
-      {id: 'id1', title: 'title1'},
-      {id: 'id2', title: 'title2'},
+      {id: 'id1', title: 'title1', status: 'available'},
+      {id: 'id2', title: 'title2', status: 'unavailable'},
     ];
 
     const wrapper = shallow(<BookList alreadyLoaded={true}
@@ -50,9 +51,10 @@ describe("<BookList />", () => {
 
     expect(bookComponents.at(0).key()).toEqual('id1');
     expect(bookComponents.at(0).props().title).toEqual('title1');
+    expect(bookComponents.at(0).props().status).toEqual('available');
     expect(bookComponents.at(1).key()).toEqual('id2');
     expect(bookComponents.at(1).props().title).toEqual('title2');
-
+    expect(bookComponents.at(1).props().status).toEqual('unavailable');
   });
 
 });
@@ -83,6 +85,30 @@ describe('<ConnectedBookList />', () => {
       actions.loadBooksSuccess(bookList),
     ]);
 
+  });
+
+  it('navigates to borrow screen when clicking on borrow button for a book', () => {
+
+    const bookId = 'some-book-id';
+
+    const store = createStore({
+      books: {
+        alreadyLoaded: true,
+        booksList: [{id: bookId, title: 'a title', status: 'available'}],
+      }
+    });
+
+    const wrapper = shallow(<ConnectedBookList store={store} />).dive();
+
+    const bookWrapper = wrapper.find("Book").dive();
+
+    bookWrapper.find(".book-borrow-button").simulate("click");
+
+    const dispatchedActions = store.getActions();
+
+    expect(dispatchedActions).toEqual([
+      push(`/borrow/${bookId}`),
+    ])
   });
 
 });

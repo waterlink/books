@@ -6,6 +6,7 @@ import {AppContainer} from 'react-hot-loader';
 import {Root} from "./components/Root";
 import configureStore from "./store/configureStore";
 import {booksApi, BooksApiService} from "./services/BooksApiService";
+import './styles/book.scss';
 
 const store = configureStore();
 
@@ -23,7 +24,7 @@ if (module.hot) {
     const NewRoot = require('./components/Root').Root;
     render(
       <AppContainer>
-        <NewRoot />
+        <NewRoot/>
       </AppContainer>,
       document.getElementById('app')
     );
