@@ -3,7 +3,6 @@ package nl.rws.books;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin(origins = {
@@ -21,10 +20,8 @@ public class BooksController {
 
     @GetMapping("/books")
     public ResponseEntity<BookListResponse> getListOfBooks() {
-        Iterable<Book> books = this.repository.findAll();
-        List<Book> bookList = new ArrayList<>();
-        books.forEach(book -> bookList.add(book));
-        return ResponseEntity.ok(new BookListResponse(bookList));
+        List<Book> books = this.repository.findAll();
+        return ResponseEntity.ok(new BookListResponse(books));
     }
 
     @PostMapping("/books/{id}/borrow")

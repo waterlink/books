@@ -1,0 +1,1 @@
+ALTER TABLE books ADD COLUMN status VARCHAR(25) NOT NULL DEFAULT 'available';

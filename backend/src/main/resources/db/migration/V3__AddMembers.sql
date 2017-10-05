@@ -2,5 +2,3 @@ CREATE TABLE members (
   id VARCHAR(50) PRIMARY KEY,
   name VARCHAR(255)
 );
-
-ALTER TABLE books ADD COLUMN borrowed_by_id VARCHAR(50) NULL;
