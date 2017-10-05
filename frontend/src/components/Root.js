@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {ConnectedBookList} from "./BookList";
 import {Provider} from "react-redux";
+import {ConnectedBookList} from "../containers/BookList";
 
 export class Root extends Component {
 

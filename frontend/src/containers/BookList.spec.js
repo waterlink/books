@@ -1,6 +1,10 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import {BookList} from './BookList';
+import {BookList, ConnectedBookList} from './BookList';
+import thunk from 'redux-thunk';
+import {createMockStore} from "../testutils";
+import {actions} from "../actions/booksActions";
+import {booksApi, MockBooksApiService} from "../services/BooksApiService";
 
 describe("<BookList />", () => {
 
@@ -48,6 +52,38 @@ describe("<BookList />", () => {
     expect(bookComponents.at(0).props().title).toEqual('title1');
     expect(bookComponents.at(1).key()).toEqual('id2');
     expect(bookComponents.at(1).props().title).toEqual('title2');
+
+  });
+
+});
+
+const createStore = createMockStore([thunk]);
+
+describe('<ConnectedBookList />', () => {
+
+  it('loads books from store', () => {
+    const bookList = [
+      {id: 'an id', title: 'a title'}
+    ];
+
+    booksApi.booksApiService = new MockBooksApiService(bookList);
+
+    const store = createStore({
+      books: {
+        alreadyLoaded: false,
+        booksList: [],
+      }
+    });
+
+    shallow(<ConnectedBookList store={store} />).dive();
+
+    const dispatchedActions = store.getActions();
+
+    expect(dispatchedActions).toEqual([
+      actions.loadBooksSuccess({
+        books: bookList,
+      }),
+    ]);
 
   });
 

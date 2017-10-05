@@ -5,8 +5,11 @@ import {render} from 'react-dom';
 import {AppContainer} from 'react-hot-loader';
 import {Root} from "./components/Root";
 import configureStore from "./store/configureStore";
+import {booksApi, BooksApiService} from "./services/BooksApiService";
 
 const store = configureStore();
+
+booksApi.booksApiService = new BooksApiService();
 
 render(
   <AppContainer>

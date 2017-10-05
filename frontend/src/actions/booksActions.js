@@ -1,3 +1,5 @@
+import {booksApi} from "../services/BooksApiService";
+
 export const t = {
 
   LOAD_BOOKS: 'LOAD_BOOKS',
@@ -10,8 +12,7 @@ export const actions = {
 
   loadBooks: (payload) => {
     return (dispatch) => {
-      fetch("http://localhost:9090/v1/books")
-        .then(responseBody => responseBody.json())
+      booksApi.booksApiService.loadBooks()
         .then(response =>
           dispatch(actions.loadBooksSuccess(response)))
         .catch((e) =>
