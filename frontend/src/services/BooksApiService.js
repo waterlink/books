@@ -1,3 +1,5 @@
+import {config} from '../config';
+
 export const booksApi = {
   booksApiService: null,
 };
@@ -5,7 +7,7 @@ export const booksApi = {
 export class BooksApiService {
 
   loadBooks() {
-    return fetch("http://localhost:9090/v1/books")
+    return fetch(config.apiGateway + "/v1/books")
       .then(responseBody => responseBody.json())
       .then(response => response["books"])
   }
