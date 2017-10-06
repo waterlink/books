@@ -1,0 +1,42 @@
+github_config: &github
+  uri: https://github.com/waterlink/books.git
+  params:
+    depth: 1
+
+pcf_config: &pcf
+  api: {{pcf-apiurl}}
+  username: {{pcf-username}}
+  password: {{pcf-password}}
+  organization: {{pcf-org}}
+
+resources:
+  - name: source
+    type: git
+    source:
+      <<: *github
+      branch: master
+
+  - name: deploy-test
+      type: cf
+      source:
+        <<: *pcf
+        space: Test
+
+jobs:
+  - name: deploy-backend-to-test
+    plan:
+    - get: source
+      trigger: true
+    - task:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source: { repository: openjdk }
+      inputs:
+      - name: source
+      run:
+        path: source/ci/scripts/build-backend.sh
+    - put: deploy-test
+      params:
+        current_app_name: books-backend-test
+        manifest: source/backend/manifest-test.yml
