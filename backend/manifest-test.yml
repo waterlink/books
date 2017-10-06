@@ -1,0 +1,6 @@
+---
+inherit: manifest-base.yml
+domain: cf-tst.intranet.rws.nl
+
+applications:
+- name: books-backend-test
