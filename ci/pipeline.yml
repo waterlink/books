@@ -31,6 +31,8 @@ jobs:
         - name: source
         run:
           path: source/ci/scripts/build-backend.sh
+        outputs:
+        - name: backend-built
     - put: deploy-test
       params:
         current_app_name: books-backend-test
