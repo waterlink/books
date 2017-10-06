@@ -1,6 +1,8 @@
 ---
 inherit: manifest-base.yml
 domain: cf-acc.intranet.rws.nl
+env:
+  SPRING_PROFILES_ACTIVE: 'acceptance,cloud'
 
 applications:
 - name: books-backend-acceptance

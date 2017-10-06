@@ -1,8 +1,6 @@
 ---
 inherit: manifest-base.yml
 domain: cf-tst.intranet.rws.nl
-env:
-  SPRING_PROFILES_ACTIVE: 'test,cloud'
 
 applications:
-- name: books-backend-test
+- name: books-frontend-test
