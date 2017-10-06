@@ -10,7 +10,7 @@ export const t = {
 
 export const actions = {
 
-  loadBooks: (payload) => {
+  loadBooks: () => {
     return (dispatch) => {
       booksApi.booksApiService.loadBooks()
         .then(response =>

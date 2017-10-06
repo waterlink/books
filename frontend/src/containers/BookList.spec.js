@@ -9,6 +9,8 @@ import {push} from "react-router-redux";
 
 describe("<BookList />", () => {
 
+  const startBorrow = () => {};
+
   let loadedBooks;
 
   const loadBooks = () => {
@@ -43,7 +45,8 @@ describe("<BookList />", () => {
 
     const wrapper = shallow(<BookList alreadyLoaded={true}
                       loadBooks={loadBooks}
-                      books={books}/>);
+                      books={books}
+                      startBorrow={startBorrow}/>);
 
     const bookComponents = wrapper.find('Book');
 

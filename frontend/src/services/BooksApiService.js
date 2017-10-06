@@ -28,7 +28,7 @@ export class MockBooksApiService {
         return fakePromise;
       },
 
-      catch: (fn) => {
+      catch: () => {
         return fakePromise;
       },
     };

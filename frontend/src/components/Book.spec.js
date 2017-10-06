@@ -16,7 +16,7 @@ describe("<Book />", () => {
   it("renders book with title", () => {
     const bookTitle = "Robin Hood";
 
-    const wrapper = shallow(<Book title={bookTitle} startBorrow={startBorrow}/>);
+    const wrapper = shallow(<Book id="id" status="status" title={bookTitle} startBorrow={startBorrow}/>);
 
     const titleText = wrapper.find('.book-title').text();
     expect(titleText).toEqual(bookTitle);
@@ -24,7 +24,7 @@ describe("<Book />", () => {
 
   it("renders book status", () => {
 
-    const wrapper = shallow(<Book status={"available"} startBorrow={startBorrow}/>);
+    const wrapper = shallow(<Book id="id" status={"available"} title="title" startBorrow={startBorrow}/>);
 
     const status = wrapper.find('.book-status').text();
     expect(status).toEqual("available");
@@ -33,7 +33,7 @@ describe("<Book />", () => {
   it("starts borrow process when borrow button clicked", () => {
     const bookId = 'someBookId';
 
-    const wrapper = shallow(<Book id={bookId} startBorrow={startBorrow}/>);
+    const wrapper = shallow(<Book id={bookId} status="status" title="title" startBorrow={startBorrow}/>);
 
     wrapper.find('.book-borrow-button').simulate("click");
 
@@ -43,7 +43,7 @@ describe("<Book />", () => {
   it("starts borrow process when borrow button clicked", () => {
     const bookId = 'someBookId';
 
-    shallow(<Book id={bookId} startBorrow={startBorrow}/>);
+    shallow(<Book id={bookId} status="status" title="title" startBorrow={startBorrow}/>);
 
     expect(startedBorrowWithId).toEqual('was not called');
   });
