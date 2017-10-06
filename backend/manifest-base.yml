@@ -2,3 +2,5 @@ memory: 1G
 instances: 1
 path: ./build/libs/backend-0.0.1-SNAPSHOT.jar
 buildpack: https://github.com/cloudfoundry/java-buildpack.git
+services:
+- books-db
