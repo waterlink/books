@@ -63,7 +63,7 @@ public class BooksController {
 
         Book book = booksRepository.findOne(id);
 
-        if (book != null) {
+        if ((book != null) && (book.getStatus() == "available")) {
             booksRepository.delete(id);
         }
 

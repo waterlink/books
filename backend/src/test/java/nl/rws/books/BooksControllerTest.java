@@ -141,7 +141,7 @@ public class BooksControllerTest {
     }
 
     @Test
-    public void deleteEndpointDeletesBook() throws Exception {
+    public void deleteEndpointDeletesBookThatIsPresent() throws Exception {
         final Book book = new Book(
                 "9ea360bc-8198-4e6a-be0c-63670891e1e8",
                 "Ivanhoe",
@@ -156,5 +156,41 @@ public class BooksControllerTest {
                 .andExpect(status().isOk());
 
         verify(booksRepository).delete(book.getId());
+    }
+
+    @Test
+    public void deleteEndpointDoesNotDeleteBookWhenNotPresent() throws Exception {
+        final Book book = new Book(
+                "9ea360bc-8198-4e6a-be0c-63670891e1e8",
+                "Ivanhoe",
+                "available",
+                null
+        );
+        when(booksRepository.findOne(book.getId()))
+                .thenReturn(null);
+
+        mockMvc.perform(post("/v1/books/" + book.getId() + "/delete")
+                .param("id",book.getId()))
+                .andExpect(status().isOk());
+
+        verify(booksRepository, never()).delete(book.getId());
+    }
+
+    @Test
+    public void deleteEndpointDoesNotDeleteBookWhenBookIsBorrowed() throws Exception {
+        final Book book = new Book(
+                "9ea360bc-8198-4e6a-be0c-63670891e1e8",
+                "Ivanhoe",
+                "unavailable",
+                null
+        );
+        when(booksRepository.findOne(book.getId()))
+                .thenReturn(book);
+
+        mockMvc.perform(post("/v1/books/" + book.getId() + "/delete")
+                .param("id",book.getId()))
+                .andExpect(status().isOk());
+
+        verify(booksRepository, never()).delete(book.getId());
     }
 }
