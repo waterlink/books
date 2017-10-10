@@ -16,10 +16,11 @@ public class Member {
 
     private String name;
 
-    public Member() {
+    public String getId() {
+        return id;
     }
 
-    public Member(String id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -31,12 +32,16 @@ public class Member {
         this.name = name;
     }
 
-    public String getId() {
-        return id;
+    public Member() {
     }
 
-    public void setId(String id) {
+    public Member(String id) {
         this.id = id;
+    }
+
+    public Member(String id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     @Override
@@ -58,6 +63,7 @@ public class Member {
     public String toString() {
         return "Member{" +
                 "id='" + id + '\'' +
+                ", name='" + name + '\'' +
                 '}';
     }
 }

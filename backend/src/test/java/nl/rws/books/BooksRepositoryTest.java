@@ -25,7 +25,6 @@ public class BooksRepositoryTest {
 
     @Test
     public void CanCreateAndFindBooks() throws Exception {
-
         Book book1 = new Book("Ivanhoe");
         Book book2 = new Book("Robin Hood");
         booksRepository.save(book1);
@@ -36,6 +35,5 @@ public class BooksRepositoryTest {
         assertThat(books.get(0).getTitle()).isEqualTo(book1.getTitle());
         assertThat(books.get(1).getTitle()).isEqualTo(book2.getTitle());
         assertThat(books.size()).isEqualTo(2);
-
     }
 }

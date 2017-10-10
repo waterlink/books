@@ -36,22 +36,6 @@ public class Book {
         this.title = title;
     }
 
-    public Book() {
-        this.status = "available";
-    }
-
-    public Book(String title) {
-        this();
-        this.title = title;
-    }
-
-    public Book(String id, String title, String status, Member borrowedBy) {
-        this.id = id;
-        this.title = title;
-        this.status = status;
-        this.borrowedBy = borrowedBy;
-    }
-
     public String getStatus() {
         return status;
     }
@@ -65,6 +49,22 @@ public class Book {
     }
 
     public void setBorrowedBy(Member borrowedBy) {
+        this.borrowedBy = borrowedBy;
+    }
+
+    public Book() {
+        this.status = "available";
+    }
+
+    public Book(String title) {
+        this();
+        this.title = title;
+    }
+
+    public Book(String id, String title, String status, Member borrowedBy) {
+        this.id = id;
+        this.title = title;
+        this.status = status;
         this.borrowedBy = borrowedBy;
     }
 
