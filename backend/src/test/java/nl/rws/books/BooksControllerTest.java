@@ -112,6 +112,7 @@ public class BooksControllerTest {
                 "unavailable",
                 new Member(member.getId())
         );
+        verify(booksRepository).findOne(book.getId());
         verify(booksRepository, never()).save(unavailableBook);
     }
 
@@ -191,6 +192,41 @@ public class BooksControllerTest {
                 .param("id",book.getId()))
                 .andExpect(status().isOk());
 
+        verify(booksRepository).findOne(book.getId());
         verify(booksRepository, never()).delete(book.getId());
     }
+
+    @Test
+    public void updateEndpointUpdatesBook() throws Exception {
+        final Book book = new Book(
+                "9ea360bc-8198-4e6a-be0c-63670891e1e8",
+                "Ivanhoe",
+                "available",
+                null
+        );
+
+        final Book updatedBook = new Book(
+                "9ea360bc-8198-4e6a-be0c-63670891e1e8",
+                "Ivanhoe, the hero",
+                "available",
+                null
+        );
+
+        when(booksRepository.findOne(book.getId()))
+                .thenReturn(book);
+        when(booksRepository.save(book))
+                .thenReturn(updatedBook);
+
+        mockMvc.perform(post("/v1/books/" + book.getId() + "/update")
+                .param("title", updatedBook.getTitle()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", equalTo(updatedBook.getId())))
+                .andExpect(jsonPath("$.title", equalTo(updatedBook.getTitle())))
+                .andExpect(jsonPath("$.status", equalTo(updatedBook.getStatus())))
+                .andExpect(jsonPath("$.borrowedBy", equalTo(updatedBook.getBorrowedBy())));
+
+        verify(booksRepository).save(book);
+        verify(booksRepository).findOne(book.getId());
+    }
+
 }

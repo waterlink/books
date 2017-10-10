@@ -37,8 +37,7 @@ public class BooksController {
             booksRepository.save(book);
 
             return ResponseEntity.ok(book);
-        }
-        else {
+        } else {
             ResponseEntity responseEntity = new ResponseEntity("Book with id:" + book.getId() + " can not be borrowed", HttpStatus.BAD_REQUEST);
             return responseEntity;
         }
@@ -52,9 +51,7 @@ public class BooksController {
 
         Book book = new Book(id, title, status, null);
 
-        Book savedBook = booksRepository.save(book);
-
-        return ResponseEntity.ok(savedBook);
+        return ResponseEntity.ok(booksRepository.save(book));
     }
 
     @PostMapping("/books/{id}/delete")
@@ -65,6 +62,21 @@ public class BooksController {
 
         if ((book != null) && (book.getStatus() == "available")) {
             booksRepository.delete(id);
+        }
+
+        return ResponseEntity.ok(book);
+    }
+
+    @PostMapping("/books/{id}/update")
+    public ResponseEntity<Book> update(
+            @PathVariable String id,
+            @RequestParam String title) throws Exception {
+
+        Book book = booksRepository.findOne(id);
+
+        if ((book != null)) {
+            book.setTitle(title);
+            return ResponseEntity.ok(booksRepository.save(book));
         }
 
         return ResponseEntity.ok(book);
