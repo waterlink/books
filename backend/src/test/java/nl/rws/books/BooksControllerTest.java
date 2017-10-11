@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Mockito.never;
@@ -104,7 +105,7 @@ public class BooksControllerTest {
                 .andReturn();
 
         String content = result.getResponse().getContentAsString();
-        assert(content).contains("can not be borrowed");
+        assertThat(content).contains("can not be borrowed");
 
         final Book unavailableBook = new Book(
                 book.getId(),
@@ -129,7 +130,7 @@ public class BooksControllerTest {
                 .thenReturn(book);
 
         mockMvc.perform(post("/v1/books/add")
-                .param("id",book.getId())
+                .param("id", book.getId())
                 .param("title", book.getTitle())
                 .param("status", book.getStatus()))
                 .andExpect(status().isOk())
@@ -153,7 +154,7 @@ public class BooksControllerTest {
                 .thenReturn(book);
 
         mockMvc.perform(post("/v1/books/" + book.getId() + "/delete")
-                .param("id",book.getId()))
+                .param("id", book.getId()))
                 .andExpect(status().isOk());
 
         verify(booksRepository).delete(book.getId());
@@ -171,7 +172,7 @@ public class BooksControllerTest {
                 .thenReturn(null);
 
         mockMvc.perform(post("/v1/books/" + book.getId() + "/delete")
-                .param("id",book.getId()))
+                .param("id", book.getId()))
                 .andExpect(status().isOk());
 
         verify(booksRepository, never()).delete(book.getId());
@@ -189,7 +190,7 @@ public class BooksControllerTest {
                 .thenReturn(book);
 
         mockMvc.perform(post("/v1/books/" + book.getId() + "/delete")
-                .param("id",book.getId()))
+                .param("id", book.getId()))
                 .andExpect(status().isOk());
 
         verify(booksRepository).findOne(book.getId());

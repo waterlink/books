@@ -1,6 +1,5 @@
 package nl.rws.books;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,9 +37,14 @@ public class BooksController {
 
             return ResponseEntity.ok(book);
         } else {
-            ResponseEntity responseEntity = new ResponseEntity("Book with id:" + book.getId() + " can not be borrowed", HttpStatus.BAD_REQUEST);
-            return responseEntity;
+            throw new BookUnavailableException(book);
         }
+    }
+
+    @ExceptionHandler(BookUnavailableException.class)
+    public ResponseEntity<ErrorResponse> handleBookUnavailableException(BookUnavailableException e) {
+        ErrorResponse errorResponse = new ErrorResponse("BOOK_UNAVAILABLE", e.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
     @PostMapping("/books/add")
