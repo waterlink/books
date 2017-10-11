@@ -110,8 +110,8 @@ describe('<ConnectedBookList />', () => {
     const dispatchedActions = store.getActions();
 
     expect(dispatchedActions).toEqual([
-      push(`/borrow/${bookId}`),
-    ])
+      push(`/borrow/${bookId}`)
+    ]);
   });
 
 });

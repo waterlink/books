@@ -7,11 +7,11 @@ export class Book extends Component {
 
     const onBorrowClick = () => this.props.startBorrow(this.props.id);
 
-    return <div className="book-container">
+    return(<div className="book-container">
       <div className="book-title">{this.props.title}</div>
       <div className="book-status">{this.props.status}</div>
       <a href="#" className="book-borrow-button" onClick={onBorrowClick}>Borrow</a>
-    </div>
+    </div>);
   }
 
 }

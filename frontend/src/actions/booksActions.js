@@ -16,22 +16,22 @@ export const actions = {
         .then(response =>
           dispatch(actions.loadBooksSuccess(response)))
         .catch((e) =>
-          dispatch(actions.loadBooksFailure(e)))
-    }
+          dispatch(actions.loadBooksFailure(e)));
+    };
   },
 
   loadBooksSuccess: (payload) => {
     return {
       type: t.LOAD_BOOKS_SUCCESS,
       payload,
-    }
+    };
   },
 
   loadBooksFailure: (payload) => {
     return {
       type: t.LOAD_BOOKS_FAILURE,
       payload,
-    }
+    };
   },
 
 };

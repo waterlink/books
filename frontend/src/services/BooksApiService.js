@@ -9,7 +9,7 @@ export class BooksApiService {
   loadBooks() {
     return fetch(config.apiGateway + "/v1/books")
       .then(responseBody => responseBody.json())
-      .then(response => response["books"])
+      .then(response => response["books"]);
   }
 
 }
