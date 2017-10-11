@@ -6,6 +6,7 @@ import {AppContainer} from 'react-hot-loader';
 import {Root} from "./components/Root";
 import configureStore from "./store/configureStore";
 import {booksApi, BooksApiService} from "./services/BooksApiService";
+import './styles/app.scss';
 import './styles/book.scss';
 
 const store = configureStore();

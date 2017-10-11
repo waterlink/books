@@ -25,8 +25,8 @@ public class MembersRepositoryTest {
 
     @Test
     public void CanCreateAndFindMembers() {
-        Member member1 = new Member("ceb9a708-aa9d-11e7-abc4-cec278b6b50a","Oleksii");
-        Member member2 = new Member("ceb9ab72-aa9d-11e7-abc4-cec278b6b50a","Jeroen");
+        Member member1 = new Member("ceb9a708-aa9d-11e7-abc4-cec278b6b50a", "Oleksii");
+        Member member2 = new Member("ceb9ab72-aa9d-11e7-abc4-cec278b6b50a", "Jeroen");
 
         membersRepository.save(member1);
         membersRepository.save(member2);
