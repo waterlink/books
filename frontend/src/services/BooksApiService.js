@@ -12,6 +12,20 @@ export class BooksApiService {
       .then(response => response["books"])
   }
 
+  borrow(bookId, memberId) {
+    const formData = new FormData();
+    formData.append("memberId", memberId);
+
+    return fetch(config.apiGateway + "/v1/books/" + bookId + "/borrow",{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+      },
+      body: formData
+    })
+      .then(responseBody => responseBody.json())
+  }
+
 }
 
 export class MockBooksApiService {
@@ -21,7 +35,6 @@ export class MockBooksApiService {
   }
 
   loadBooks() {
-
     const fakePromise = {
       then: (fn) => {
         fn(this.bookList);
@@ -36,4 +49,19 @@ export class MockBooksApiService {
     return fakePromise;
   }
 
+  borrow() {
+    console.log("getting in borrow Mock")
+    const fakePromise = {
+      then: (fn) => {
+        fn();
+        return fakePromise;
+      },
+
+      catch: () => {
+        return fakePromise;
+      },
+    };
+
+    return fakePromise;
+  }
 }

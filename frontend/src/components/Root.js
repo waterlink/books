@@ -10,6 +10,7 @@ export class Root extends Component {
     return (
       <Provider store={this.props.store}>
         <div className="App">
+
           <div className="App-header">
             <img src={logo} className="App-logo" alt="logo"/>
             <h1>Books Application</h1>

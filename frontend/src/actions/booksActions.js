@@ -5,6 +5,8 @@ export const t = {
   LOAD_BOOKS: 'LOAD_BOOKS',
   LOAD_BOOKS_SUCCESS: 'LOAD_BOOKS_SUCCESS',
   LOAD_BOOKS_FAILURE: 'LOAD_BOOKS_FAILURE',
+  BORROW_BOOK_SUCCESS: 'BORROW_BOOK_SUCCESS',
+  BORROW_BOOK_FAILURE: 'BORROW_BOOK_FAILURE',
 
 };
 
@@ -30,6 +32,30 @@ export const actions = {
   loadBooksFailure: (payload) => {
     return {
       type: t.LOAD_BOOKS_FAILURE,
+      payload,
+    }
+  },
+
+  borrow: (bookId) => {
+    return (dispatch) => {
+      booksApi.booksApiService.borrow(bookId)
+        .then(response =>
+          dispatch(actions.borrowBookSuccess(response)))
+        .catch((e) =>
+          dispatch(actions.borrowBookFailure(e)))
+    }
+  },
+
+  borrowBookSuccess: (payload) => {
+    return {
+      type: t.BORROW_BOOK_SUCCESS,
+      payload,
+    }
+  },
+
+  borrowBookFailure: (payload) => {
+    return {
+      type: t.BORROW_BOOK_FAILURE,
       payload,
     }
   },
