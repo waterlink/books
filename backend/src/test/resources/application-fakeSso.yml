@@ -1,0 +1,2 @@
+ssoServiceUrl: https://rws.login.cf-prod.intranet.rws.nl
+security.oauth2.resource.jwk.key-set-uri: https://rws.login.cf-prod.intranet.rws.nl/token_keys
