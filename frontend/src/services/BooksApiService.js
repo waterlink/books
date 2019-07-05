@@ -49,19 +49,4 @@ export class MockBooksApiService {
     return fakePromise;
   }
 
-  borrow() {
-    console.log("getting in borrow Mock")
-    const fakePromise = {
-      then: (fn) => {
-        fn();
-        return fakePromise;
-      },
-
-      catch: () => {
-        return fakePromise;
-      },
-    };
-
-    return fakePromise;
-  }
 }
