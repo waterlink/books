@@ -1,9 +1,10 @@
-
 .book-container {
   display: flex;
+  padding: 5px;
 
   .book-title {
     flex: 1;
+    text-align: left;
   }
 
   .book-status {

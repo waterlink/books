@@ -12,12 +12,13 @@ export class BookList extends Component {
       this.props.loadBooks();
     }
 
-    return <div>
-      {this.props.books.map(book =>
-        <Book key={book.id} {...book} startBorrow={this.props.startBorrow}/>
-      )}
-    </div>
-
+    return (
+      <div>
+        {this.props.books.map(book =>
+          <Book key={book.id} {...book} startBorrow={this.props.startBorrow}/>
+        )}
+      </div>
+    )
   }
 
 }

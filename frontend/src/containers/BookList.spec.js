@@ -22,7 +22,6 @@ describe("<BookList />", () => {
   });
 
   it("loads books when they're not loaded yet", () => {
-
     shallow(<BookList alreadyLoaded={false}
                       loadBooks={loadBooks}
                       books={[]}/>);
@@ -30,7 +29,6 @@ describe("<BookList />", () => {
   });
 
   it("doesn't load books when they're already loaded", () => {
-
     shallow(<BookList alreadyLoaded={true}
                       loadBooks={loadBooks}
                       books={[]}/>);
@@ -91,7 +89,6 @@ describe('<ConnectedBookList />', () => {
   });
 
   it('navigates to borrow screen when clicking on borrow button for a book', () => {
-
     const bookId = 'some-book-id';
 
     const store = createStore({

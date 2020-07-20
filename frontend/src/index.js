@@ -4,8 +4,9 @@ import React from 'react';
 import {render} from 'react-dom';
 import {AppContainer} from 'react-hot-loader';
 import {Root} from "./components/Root";
-import configureStore from "./store/configureStore";
+import configureStore, { history } from "./store/configureStore";
 import {booksApi, BooksApiService} from "./services/BooksApiService";
+import './styles/app.scss';
 import './styles/book.scss';
 
 const store = configureStore();
@@ -14,7 +15,7 @@ booksApi.booksApiService = new BooksApiService();
 
 render(
   <AppContainer>
-    <Root store={store}/>
+    <Root store={store} history={history}/>
   </AppContainer>,
   document.getElementById('app')
 );
@@ -24,7 +25,7 @@ if (module.hot) {
     const NewRoot = require('./components/Root').Root;
     render(
       <AppContainer>
-        <NewRoot/>
+        <NewRoot store={store} history={history}/>
       </AppContainer>,
       document.getElementById('app')
     );
